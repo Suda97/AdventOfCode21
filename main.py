@@ -70,8 +70,45 @@ def diveTwo():
     return depth * horPos
 
 
+# Day three part one
+def binaryDiagnosticOne():
+    with open("dayThreeInput.txt", "r") as file:
+        binaryArr = file.read().splitlines()
+        gammaRate = ""
+        epsilonRate = ""
+
+        j = 0
+        while j < len(binaryArr[0]):
+            i = 0
+            ones = 0
+            zeroes = 0
+
+            while i < len(binaryArr):
+                if binaryArr[i][j] == '1':
+                    ones += 1
+                else:
+                    zeroes += 1
+                i += 1
+
+            if ones > zeroes:
+                gammaRate += "1"
+                epsilonRate += "0"
+            else:
+                gammaRate += "0"
+                epsilonRate += "1"
+            j += 1
+
+    return int(gammaRate, 2) * int(epsilonRate, 2)
+
+
+# Day three part two
+def binaryDiagnosticTwo():
+    return 0
+
+
 if __name__ == '__main__':
     # print(sonarSweepOne())
     # print(sonarSweepTwo())
     # print(diveOne())
-    print(diveTwo())
+    # print(diveTwo())
+    print(binaryDiagnosticOne())
