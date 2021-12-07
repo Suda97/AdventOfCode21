@@ -199,10 +199,132 @@ def carbonNumber(count, arr):
         return carbonNumber(count, carArr)
 
 
+# Day four part one
+def bingoOne():
+    with open("dayFourInput.txt", "r") as file:
+        bingo = file.read().splitlines()
+        randomNumbers = [int(i) for i in bingo[0].split(',')]
+        blocks = 0
+        block = []
+        data = []
+
+        for x in bingo[2:]:
+            if x != "":
+                block.append([int(i) for i in x.strip().split(" ") if i != ""])
+            else:
+                data.append(block)
+                block = []
+                blocks += 1
+
+        winningBlock = checkBingoOne(data, randomNumbers)
+
+        summ = 0
+        for row in winningBlock[0]:
+            summ += sum(row)
+
+        return summ * winningBlock[1]
+
+
+def checkBingoOne(data, randomNumbers):
+    # O(n)^ TO THE MOON!!!!! (I know It's bad)
+    for number in randomNumbers:
+        for block in data:
+            for row in block:
+                for i, num in enumerate(row):
+                    if num == number:
+                        row[i] = False
+                    else:
+                        continue
+                if row == [False, False, False, False, False]:
+                    return block, number
+            for i in range(0, 5):
+                count = 0
+                for row in block:
+                    if row[i] == False:
+                        count += 1
+                if count == 5:
+                    return block, number
+
+
+# Day four part two
+def bingoTwo():
+    with open("dayFourInput.txt", "r") as file:
+        bingo = file.read().splitlines()
+        randomNumbers = [int(i) for i in bingo[0].split(',')]
+        blocks = 0
+        block = []
+        data = []
+
+        for x in bingo[2:]:
+            if x != "":
+                block.append([int(i) for i in x.strip().split(" ") if i != ""])
+            else:
+                data.append(block)
+                block = []
+                blocks += 1
+
+        while len(data) != 1:
+            winningBlock = checkBingoTwo(data, randomNumbers)
+            data = winningBlock[0]
+            randomNumbers = winningBlock[1]
+
+        winningBlock = check(winningBlock[0],winningBlock[1])
+        summ = 0
+        for row in winningBlock[0]:
+            summ += sum(row)
+
+        return summ * winningBlock[1]
+
+
+def checkBingoTwo(data, randomNumbers):
+    # O(n)^4 TO THE MOON!!!!! (I know It's bad)
+    for number in randomNumbers:
+        for b, block in enumerate(data):
+            for row in block:
+                for i, num in enumerate(row):
+                    if num == number:
+                        row[i] = False
+                    else:
+                        continue
+                if row == [False, False, False, False, False]:
+                    data.pop(b)
+                    return data, randomNumbers, number
+            for i in range(0, 5):
+                count = 0
+                for row in block:
+                    if row[i] == False:
+                        count += 1
+                if count == 5:
+                    data.pop(b)
+                    return data, randomNumbers, number
+
+
+def check(data, randomNumbers):
+    for number in randomNumbers:
+        for b, block in enumerate(data):
+            for row in block:
+                for i, num in enumerate(row):
+                    if num == number:
+                        row[i] = False
+                    else:
+                        continue
+                if row == [False, False, False, False, False]:
+                    return block, number
+            for i in range(0, 5):
+                count = 0
+                for row in block:
+                    if row[i] == False:
+                        count += 1
+                if count == 5:
+                    return block, number
+
+
 if __name__ == '__main__':
     # print(sonarSweepOne())
     # print(sonarSweepTwo())
     # print(diveOne())
     # print(diveTwo())
     # print(binaryDiagnosticOne())
-    print(binaryDiagnosticTwo())
+    # print(binaryDiagnosticTwo())
+    # print(bingoOne())
+    # print(bingoTwo())
