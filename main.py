@@ -103,7 +103,100 @@ def binaryDiagnosticOne():
 
 # Day three part two
 def binaryDiagnosticTwo():
-    return 0
+    with open("dayThreeInput.txt", "r") as file:
+        binaryArr = file.read().splitlines()
+        count = 0
+        ones = 0
+        zeroes = 0
+
+        for x in binaryArr:
+            if x[count] == '1':
+                ones += 1
+            else:
+                zeroes += 1
+
+        oxyArr = []
+        if ones >= zeroes:
+            for x in binaryArr:
+                if x[count] == "1":
+                    oxyArr.append(x)
+        else:
+            for x in binaryArr:
+                if x[count] == "0":
+                    oxyArr.append(x)
+
+        count = 1
+        oxygen = oxygenNumber(count, oxyArr)
+
+        carArr = []
+        count = 0
+        if zeroes < ones or zeroes == ones:
+            for x in binaryArr:
+                if x[count] == "0":
+                    carArr.append(x)
+        else:
+            for x in binaryArr:
+                if x[count] == "1":
+                    carArr.append(x)
+
+        count = 1
+        carbon = carbonNumber(count, carArr)
+
+        return int(oxygen, 2) * int(carbon, 2)
+
+
+def oxygenNumber(count, arr):
+    ones = 0
+    zeroes = 0
+
+    for x in arr:
+        if x[count] == '1':
+            ones += 1
+        else:
+            zeroes += 1
+
+    oxyArr = []
+    if ones > zeroes or ones == zeroes:
+        for x in arr:
+            if x[count] == "1":
+                oxyArr.append(x)
+    else:
+        for x in arr:
+            if x[count] == "0":
+                oxyArr.append(x)
+
+    count += 1
+    if len(oxyArr) == 1:
+        return arr[0]
+    else:
+        return oxygenNumber(count, oxyArr)
+
+
+def carbonNumber(count, arr):
+    ones = 0
+    zeroes = 0
+
+    for x in arr:
+        if x[count] == '1':
+            ones += 1
+        else:
+            zeroes += 1
+
+    carArr = []
+    if zeroes < ones or ones == zeroes:
+        for x in arr:
+            if x[count] == "0":
+                carArr.append(x)
+    else:
+        for x in arr:
+            if x[count] == "1":
+                carArr.append(x)
+
+    count += 1
+    if len(carArr) == 1:
+        return carArr[0]
+    else:
+        return carbonNumber(count, carArr)
 
 
 if __name__ == '__main__':
@@ -111,4 +204,5 @@ if __name__ == '__main__':
     # print(sonarSweepTwo())
     # print(diveOne())
     # print(diveTwo())
-    print(binaryDiagnosticOne())
+    # print(binaryDiagnosticOne())
+    print(binaryDiagnosticTwo())
