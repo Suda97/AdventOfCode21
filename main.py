@@ -235,13 +235,17 @@ def checkBingoOne(data, randomNumbers):
                         row[i] = False
                     else:
                         continue
+
                 if row == [False, False, False, False, False]:
                     return block, number
+
             for i in range(0, 5):
                 count = 0
+
                 for row in block:
                     if row[i] == False:
                         count += 1
+
                 if count == 5:
                     return block, number
 
@@ -286,14 +290,18 @@ def checkBingoTwo(data, randomNumbers):
                         row[i] = False
                     else:
                         continue
+
                 if row == [False, False, False, False, False]:
                     data.pop(b)
                     return data, randomNumbers, number
+
             for i in range(0, 5):
                 count = 0
+
                 for row in block:
                     if row[i] == False:
                         count += 1
+
                 if count == 5:
                     data.pop(b)
                     return data, randomNumbers, number
@@ -308,18 +316,24 @@ def check(data, randomNumbers):
                         row[i] = False
                     else:
                         continue
+
                 if row == [False, False, False, False, False]:
                     return block, number
+
             for i in range(0, 5):
                 count = 0
+
                 for row in block:
                     if row[i] == False:
                         count += 1
+
                 if count == 5:
                     return block, number
 
 
 # Day five part one
+def hydroVenture():
+    return "Kappa"
 
 if __name__ == '__main__':
     # print(sonarSweepOne())
@@ -330,4 +344,4 @@ if __name__ == '__main__':
     # print(binaryDiagnosticTwo())
     # print(bingoOne())
     # print(bingoTwo())
-    print(dayFive())
+    print(hydroVenture())
