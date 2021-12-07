@@ -319,6 +319,8 @@ def check(data, randomNumbers):
                     return block, number
 
 
+# Day five part one
+
 if __name__ == '__main__':
     # print(sonarSweepOne())
     # print(sonarSweepTwo())
@@ -328,3 +330,4 @@ if __name__ == '__main__':
     # print(binaryDiagnosticTwo())
     # print(bingoOne())
     # print(bingoTwo())
+    print(dayFive())
