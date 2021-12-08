@@ -333,7 +333,49 @@ def check(data, randomNumbers):
 
 # Day five part one
 def hydroVenture():
-    return "Kappa"
+    with open("dayFiveInput.txt", "r") as file:
+        data = file.read().splitlines()
+        numbers = []
+        res = ([[0 for col in range(1000)] for row in range(1000)], [0])
+        count = 0
+
+        for i, points in enumerate(data):
+            num = points.replace(' -> ', ',')
+            num = (num.strip().split(","))
+            numbers.append([int(j) for j in num])
+
+            if numbers[i][0] == numbers[i][2]:
+                res = vertical(res, numbers[i])
+            elif numbers[i][1] == numbers[i][3]:
+                res = horizontal(res, numbers[i])
+
+        return res[1][0]
+
+
+def horizontal(res, crds):
+    start = min(crds[0], crds[2])
+    end = max(crds[0], crds[2]) + 1
+
+    for i in range(start, end):
+        res[0][i][crds[1]] += 1
+        if res[0][i][crds[1]] == 2:
+            res[1][0] += 1
+    return res
+
+
+def vertical(res, crds):
+    start = min(crds[1], crds[3])
+    end = max(crds[1], crds[3]) + 1
+
+    for i in range(start, end):
+        res[0][crds[0]][i] += 1
+        if res[0][crds[0]][i] == 2:
+            res[1][0] += 1
+    return res
+
+
+def diagonal(res ,crds):
+    print("Kappa")
 
 if __name__ == '__main__':
     # print(sonarSweepOne())
