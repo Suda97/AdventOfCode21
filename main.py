@@ -443,7 +443,48 @@ def diagonal(res, crds):
 
 # Day six part one
 def lanterfishOne():
-    return "kappa"
+    with open("daySixInput.txt", "r") as file:
+        data = [int(i) for i in file.read().split(",")]
+        currData = data
+
+        for i in range(80):
+            temp_data = []
+            new_fish = []
+            for fish in currData:
+                if fish == 0:
+                    new_fish.append(8)
+                    fish = 6
+                else:
+                    fish -= 1
+                temp_data.append(fish)
+
+            temp_data.extend(new_fish)
+            currData = temp_data
+
+        return len(currData)
+
+
+# Day six part two
+def lanterfishTwo():
+    with open("daySixInput.txt", "r") as file:
+        data = [int(i) for i in file.read().split(",")]
+        currData = data
+
+        for i in range(80):
+            temp_data = []
+            new_fish = []
+            for fish in currData:
+                if fish == 0:
+                    new_fish.append(8)
+                    fish = 6
+                else:
+                    fish -= 1
+                temp_data.append(fish)
+
+            temp_data.extend(new_fish)
+            currData = temp_data
+
+        return len(currData)
 
 
 if __name__ == '__main__':
@@ -456,4 +497,5 @@ if __name__ == '__main__':
     # print(bingoOne())
     # print(bingoTwo())
     # print(hydroVenture())
-    print(lanterfishOne())
+    # print(lanterfishOne())
+    print(lanterfishTwo())
