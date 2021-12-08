@@ -272,7 +272,7 @@ def bingoTwo():
             data = winningBlock[0]
             randomNumbers = winningBlock[1]
 
-        winningBlock = check(winningBlock[0],winningBlock[1])
+        winningBlock = check(winningBlock[0], winningBlock[1])
         summ = 0
         for row in winningBlock[0]:
             summ += sum(row)
@@ -348,6 +348,8 @@ def hydroVenture():
                 res = vertical(res, numbers[i])
             elif numbers[i][1] == numbers[i][3]:
                 res = horizontal(res, numbers[i])
+            else:
+                res = diagonal(res, numbers[i])
 
         return res[1][0]
 
@@ -374,8 +376,75 @@ def vertical(res, crds):
     return res
 
 
-def diagonal(res ,crds):
-    print("Kappa")
+class point:
+    def __init__(self, xvalue=None, yvalue=None):
+        self.xvalue = xvalue
+        self.yvalue = yvalue
+
+
+def diagonal(res, crds):
+    pointOne = point(crds[0], crds[1])
+    pointTwo = point(crds[2], crds[3])
+
+    if pointOne.xvalue > pointTwo.xvalue and pointOne.yvalue < pointTwo.yvalue:
+        counter = pointOne.xvalue - pointTwo.xvalue + 1
+        i = pointTwo.xvalue
+        j = pointTwo.yvalue
+
+        while counter > 0:
+            res[0][i][j] += 1
+            if res[0][i][j] == 2:
+                res[1][0] += 1
+            i += 1
+            j -= 1
+            counter -= 1
+
+    elif pointTwo.xvalue > pointOne.xvalue and pointTwo.yvalue < pointOne.yvalue:
+        counter = pointTwo.xvalue - pointOne.xvalue + 1
+        i = pointOne.xvalue
+        j = pointOne.yvalue
+
+        while counter > 0:
+            res[0][i][j] += 1
+            if res[0][i][j] == 2:
+                res[1][0] += 1
+            i += 1
+            j -= 1
+            counter -= 1
+
+    elif pointOne.xvalue > pointTwo.xvalue and pointOne.yvalue > pointTwo.yvalue:
+        counter = pointOne.xvalue - pointTwo.xvalue + 1
+        i = pointTwo.xvalue
+        j = pointTwo.yvalue
+
+        while counter > 0:
+            res[0][i][j] += 1
+            if res[0][i][j] == 2:
+                res[1][0] += 1
+            i += 1
+            j += 1
+            counter -= 1
+
+    elif pointTwo.xvalue > pointOne.xvalue and pointTwo.yvalue > pointOne.yvalue:
+        counter = pointTwo.xvalue - pointOne.xvalue + 1
+        i = pointOne.xvalue
+        j = pointOne.yvalue
+
+        while counter > 0:
+            res[0][i][j] += 1
+            if res[0][i][j] == 2:
+                res[1][0] += 1
+            i += 1
+            j += 1
+            counter -= 1
+
+    return res
+
+
+# Day six part one
+def lanterfishOne():
+    return "kappa"
+
 
 if __name__ == '__main__':
     # print(sonarSweepOne())
@@ -386,4 +455,5 @@ if __name__ == '__main__':
     # print(binaryDiagnosticTwo())
     # print(bingoOne())
     # print(bingoTwo())
-    print(hydroVenture())
+    # print(hydroVenture())
+    print(lanterfishOne())
