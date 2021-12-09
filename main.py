@@ -450,6 +450,7 @@ def lanterfishOne():
         for i in range(80):
             temp_data = []
             new_fish = []
+
             for fish in currData:
                 if fish == 0:
                     new_fish.append(8)
@@ -483,6 +484,36 @@ def lanterfishTwo():
         return sum(livesInDays.values())
 
 
+# Day seven part one
+def whaleOne():
+    with open("daySevenInput.txt", "r") as file:
+        data = [int(i) for i in file.read().split(",")]
+        fuel = []
+
+        for i in range(len(data)):
+            fuel.append((sum(abs(val - i) for val in data)))
+
+        return min(fuel)
+
+
+# Day seven part Two
+def whaleTwo():
+    with open("daySevenInput.txt", "r") as file:
+        data = [int(i) for i in file.read().split(",")]
+        fuel = []
+
+        for i in range(len(data)):
+            diff = [abs(val-i) for val in data]
+            sumDiff = sum([sum(list(range(d+1))) for d in diff])
+            fuel.append(sumDiff)
+
+        return min(fuel)
+
+
+# Day eight part one
+def sevenSegmentSearch():
+    print("I need a break")
+
 if __name__ == '__main__':
     # print(sonarSweepOne())
     # print(sonarSweepTwo())
@@ -494,4 +525,7 @@ if __name__ == '__main__':
     # print(bingoTwo())
     # print(hydroVenture())
     # print(lanterfishOne())
-    print(lanterfishTwo())
+    # print(lanterfishTwo())
+    # print(whaleOne())
+    # print(whaleTwo())
+    print(sevenSegmentSearch())
