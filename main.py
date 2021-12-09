@@ -511,8 +511,29 @@ def whaleTwo():
 
 
 # Day eight part one
-def sevenSegmentSearch():
-    print("I need a break")
+def sevenSegmentSearchOne():
+    with open("dayEightInput.txt", "r") as file:
+        data = [line for line in file.read().replace(" | ", ",").replace("\n", ",").split(",")]
+        outputData = []
+        j = 1
+
+        for i, val in enumerate(data):
+            if i == j:
+                outputData.append(val.split(" "))
+                j += 2
+
+        count = 0
+        for val in outputData:
+            for seg in val:
+                if 2 <= len(seg) <= 4 or len(seg) == 7:
+                    count += 1
+
+        return count
+
+
+def sevenSegmentSearchTwo():
+    print("Gimme a break")
+
 
 if __name__ == '__main__':
     # print(sonarSweepOne())
@@ -528,4 +549,5 @@ if __name__ == '__main__':
     # print(lanterfishTwo())
     # print(whaleOne())
     # print(whaleTwo())
-    print(sevenSegmentSearch())
+    # print(sevenSegmentSearchOne())
+    print(sevenSegmentSearchTwo())
