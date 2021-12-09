@@ -465,26 +465,22 @@ def lanterfishOne():
 
 
 # Day six part two
+from collections import Counter
+
+
 def lanterfishTwo():
     with open("daySixInput.txt", "r") as file:
         data = [int(i) for i in file.read().split(",")]
-        currData = data
+        # We have to use dict for this amount of days (256), This solution also works with part one
+        livesInDays = dict(Counter(data))
 
-        for i in range(80):
-            temp_data = []
-            new_fish = []
-            for fish in currData:
-                if fish == 0:
-                    new_fish.append(8)
-                    fish = 6
-                else:
-                    fish -= 1
-                temp_data.append(fish)
+        for i in range(256):
+            livesInDays = {d: (0 if livesInDays.get(d + 1) is None else livesInDays.get(d + 1)) for d in range(-1, 8)}
+            livesInDays[8] = livesInDays[-1]
+            livesInDays[6] += livesInDays[-1]
+            livesInDays[-1] = 0
 
-            temp_data.extend(new_fish)
-            currData = temp_data
-
-        return len(currData)
+        return sum(livesInDays.values())
 
 
 if __name__ == '__main__':
