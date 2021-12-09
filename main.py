@@ -532,7 +532,7 @@ def sevenSegmentSearchOne():
 
 
 def sevenSegmentSearchTwo():
-    print("Gimme a break")
+    print("I need a break")
 
 
 if __name__ == '__main__':
